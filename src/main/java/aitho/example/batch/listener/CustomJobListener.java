@@ -1,4 +1,4 @@
-package aitho.example.batch.util;
+package aitho.example.batch.listener;
 
 import org.springframework.batch.core.BatchStatus;
 import org.springframework.batch.core.JobExecution;
@@ -14,7 +14,7 @@ public class CustomJobListener implements JobExecutionListener {
 
     @Override
     public void afterJob(JobExecution jobExecution) {
-        if (jobExecution.getStatus() == BatchStatus.COMPLETED) {
+        if (jobExecution.getStatus().equals(BatchStatus.COMPLETED)) {
             System.exit(0);
         }
     }

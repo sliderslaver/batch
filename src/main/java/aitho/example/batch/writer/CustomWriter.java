@@ -1,19 +1,22 @@
 package aitho.example.batch.writer;
 
 import aitho.example.batch.model.User;
-import aitho.example.batch.repository.AithoRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.batch.item.ItemWriter;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.util.List;
 
+@RequiredArgsConstructor
 public class CustomWriter implements ItemWriter<User> {
 
-    @Autowired
-    private AithoRepository aithoRepository;
+    private final JdbcTemplate jdbcTemplate;
 
     @Override
-    public void write(List<? extends User> list) throws Exception {
-        aithoRepository.saveAll(list);
+    public void write(List<? extends User> list) {
+        list.forEach(user ->
+                jdbcTemplate.update("INSERT INTO user_table (id, firstName, lastName, age) VALUES (?, ?, ?, ?)",
+                user.getId(), user.getFirstName(), user.getLastName(), user.getAge())
+        );
     }
 }
