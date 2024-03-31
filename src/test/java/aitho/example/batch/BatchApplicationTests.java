@@ -1,13 +1,17 @@
 package aitho.example.batch;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.junit.jupiter.MockitoExtension;
 
-@SpringBootTest
-class BatchApplicationTests {
+@ExtendWith(MockitoExtension.class)
+public class BatchApplicationTests {
+
+	@InjectMocks
+	private BatchApplication batchApplication;
 
 	@Test
-	void contextLoads() {
-	}
-
+	void contextLoads() {}
 }
+

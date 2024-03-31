@@ -1,28 +1,18 @@
 package aitho.example.batch.model;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Builder;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
-@AllArgsConstructor
+@Data
+@Builder
 @NoArgsConstructor
-@Getter
-@Setter
+@AllArgsConstructor
 public class User {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-
     private String firstName;
     private String lastName;
     private int age;
-
-
 }
 
