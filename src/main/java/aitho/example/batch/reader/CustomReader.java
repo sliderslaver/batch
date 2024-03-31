@@ -10,7 +10,7 @@ import java.util.Optional;
 
 public class CustomReader implements ItemReader<User> {
 
-    private static final String URL = "https://dummyjson.com/users?limit=1&skip=10&select=id,firstName,lastName,age";
+    private static final String URL = "https://dummyjson.com/users?limit=10&skip=10&select=id,firstName,lastName,age";
     private final RestTemplate restTemplate;
     private Iterator<User> userIterator;
     private boolean dataFetched = false;
