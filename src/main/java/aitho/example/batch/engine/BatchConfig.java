@@ -2,6 +2,7 @@ package aitho.example.batch.engine;
 
 import aitho.example.batch.listener.CustomJobListener;
 import aitho.example.batch.model.User;
+import aitho.example.batch.processor.CustomProcessor;
 import aitho.example.batch.reader.CustomReader;
 import aitho.example.batch.writer.CustomWriter;
 import org.springframework.batch.core.Job;
@@ -27,8 +28,13 @@ public class BatchConfig {
     private StepBuilderFactory stepBuilderFactory;
 
     @Bean
-    public CustomReader apiItemReader() {
+    public CustomReader customReader() {
         return new CustomReader(new RestTemplate());
+    }
+
+    @Bean
+    public CustomProcessor customProcessor() {
+        return new CustomProcessor();
     }
 
     @Bean
@@ -42,10 +48,11 @@ public class BatchConfig {
     }
 
     @Bean
-    public Step step1(CustomReader reader, CustomWriter writer) {
+    public Step step1(CustomReader reader, CustomProcessor customProcessor, CustomWriter writer) {
         return stepBuilderFactory.get("step1")
                 .<User, User>chunk(1)
                 .reader(reader)
+                .processor(customProcessor)
                 .writer(writer)
                 .build();
     }
